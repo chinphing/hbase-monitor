@@ -1,0 +1,50 @@
+version: '2'
+
+volumes:
+    influxdata: 
+        driver: local
+
+services:
+    grafana:
+        image: grafana/grafana:4.0.0
+        ports: 
+            - "3000:3000"
+        links:
+            - influxdb
+        environment:
+            - GF_PATHS_DATA=/var/lib/grafana
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/timezone:/etc/timezone:ro
+    jmxtrans:
+        image: jmxtrans/jmxtrans:latest
+        depends_on:
+            - influxdb
+        links:
+            - influxdb
+            - grafana
+        environment:
+            - JMX_HOST_TEST=localhost
+            - JMX_PORT_TEST=17900
+            - JMX_ALIAS_TEST=TEST
+            - INFLUXDB_USER=root
+            - INFLUXDB_PASSWORD=root
+            - INFLUXDB_NAME=influx
+            - INFLUXDB_URL=http://localhost:8086
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/timezone:/etc/timezone:ro
+            - ./config/influxdb.json.tmpl:/var/lib/jmxtrans/influxdb.json.tmpl
+            - ./config/grafanadashboard.json.tmpl:/dashboards/grafanadashboard.json.tmpl
+            - ./config/docker-entrypoint.sh:/docker-entrypoint.sh
+    influxdb: 
+        image: influxdb:1.1.0-alpine
+        volumes:
+            - ./config/influxdb.conf:/etc/influxdb/influxdb.conf
+            - influxdata:/var/lib/influxdb
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/timezone:/etc/timezone:ro
+        ports:
+            - "8086:8086"
+            - "8088:8088"
+            - "8083:8083"

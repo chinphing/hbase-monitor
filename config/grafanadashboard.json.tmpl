@@ -1,0 +1,879 @@
+{
+    "dashboard": {
+        "id": null,
+        "title": "CERN - ${JMX_ALIAS}",
+        "originalTitle": "CERN - ${JMX_ALIAS}",
+        "tags": [],
+        "style": "dark",
+        "timezone": "browser",
+        "editable": true,
+        "hideControls": false,
+        "sharedCrosshair": false,
+        "rows": [
+            {
+                "collapse": false,
+                "editable": true,
+                "height": "250px",
+                "panels": [
+                    {
+                        "aliasColors": {},
+                        "bars": false,
+                        "datasource": "influx",
+                        "editable": true,
+                        "error": false,
+                        "fill": 1,
+                        "grid": {
+                            "leftLogBase": 1,
+                            "leftMax": null,
+                            "leftMin": null,
+                            "rightLogBase": 1,
+                            "rightMax": null,
+                            "rightMin": null,
+                            "threshold1": null,
+                            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+                            "threshold2": null,
+                            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+                        },
+                        "id": 13,
+                        "isNew": true,
+                        "legend": {
+                            "avg": false,
+                            "current": false,
+                            "max": false,
+                            "min": false,
+                            "show": true,
+                            "total": false,
+                            "values": false
+                        },
+                        "lines": true,
+                        "linewidth": 2,
+                        "links": [],
+                        "nullPointMode": "connected",
+                        "percentage": false,
+                        "pointradius": 5,
+                        "points": false,
+                        "renderer": "flot",
+                        "seriesOverrides": [],
+                        "span": 9,
+                        "stack": false,
+                        "steppedLine": false,
+                        "targets": [
+                            {
+                                "alias": "PeakThreadCount",
+                                "dsType": "influxdb",
+                                "groupBy": [
+                                    {
+                                        "params": [
+                                            "$interval"
+                                        ],
+                                        "type": "time"
+                                    },
+                                    {
+                                        "params": [
+                                            "null"
+                                        ],
+                                        "type": "fill"
+                                    }
+                                ],
+                                "measurement": "jvmThreadCount",
+                                "query": "SELECT mean(\"PeakThreadCount\") FROM \"jvmThreadCount\" WHERE \"hostname\" = '${JMX_ALIAS}' AND $timeFilter GROUP BY time($interval) fill(null)",
+                                "refId": "A",
+                                "resultFormat": "time_series",
+                                "select": [
+                                    [
+                                        {
+                                            "params": [
+                                                "PeakThreadCount"
+                                            ],
+                                            "type": "field"
+                                        },
+                                        {
+                                            "params": [],
+                                            "type": "mean"
+                                        }
+                                    ]
+                                ],
+                                "tags": [
+                                    {
+                                        "key": "hostname",
+                                        "operator": "=",
+                                        "value": "${JMX_ALIAS}"
+                                    }
+                                ]
+                            },
+                            {
+                                "alias": "ThreadCount",
+                                "dsType": "influxdb",
+                                "groupBy": [
+                                    {
+                                        "params": [
+                                            "$interval"
+                                        ],
+                                        "type": "time"
+                                    },
+                                    {
+                                        "params": [
+                                            "null"
+                                        ],
+                                        "type": "fill"
+                                    }
+                                ],
+                                "measurement": "jvmThreadCount",
+                                "query": "SELECT mean(\"ThreadCount\") FROM \"jvmThreadCount\" WHERE $\"hostname\" = '${JMX_ALIAS}' AND $timeFilter GROUP BY time($interval) fill(null)",
+                                "refId": "B",
+                                "resultFormat": "time_series",
+                                "select": [
+                                    [
+                                        {
+                                            "params": [
+                                                "ThreadCount"
+                                            ],
+                                            "type": "field"
+                                        },
+                                        {
+                                            "params": [],
+                                            "type": "mean"
+                                        }
+                                    ]
+                                ],
+                                "tags": [
+                                    {
+                                        "key": "hostname",
+                                        "operator": "=",
+                                        "value": "${JMX_ALIAS}"
+                                    }
+                                ]
+                            }
+                        ],
+                        "timeFrom": null,
+                        "timeShift": null,
+                        "title": "Thread Count",
+                        "tooltip": {
+                            "shared": true,
+                            "value_type": "cumulative"
+                        },
+                        "type": "graph",
+                        "x-axis": true,
+                        "y-axis": true,
+                        "y_formats": [
+                            "short",
+                            "short"
+                        ]
+                    },
+                    {
+                        "cacheTimeout": null,
+                        "colorBackground": false,
+                        "colorValue": false,
+                        "colors": [
+                            "rgba(245, 54, 54, 0.9)",
+                            "rgba(237, 129, 40, 0.89)",
+                            "rgba(50, 172, 45, 0.97)"
+                        ],
+                        "datasource": "influx",
+                        "editable": true,
+                        "error": false,
+                        "format": "none",
+                        "height": "50px",
+                        "id": 14,
+                        "interval": null,
+                        "isNew": true,
+                        "links": [],
+                        "maxDataPoints": 100,
+                        "nullPointMode": "connected",
+                        "nullText": null,
+                        "postfix": "",
+                        "postfixFontSize": "50%",
+                        "prefix": "",
+                        "prefixFontSize": "50%",
+                        "span": 2,
+                        "sparkline": {
+                            "fillColor": "rgba(31, 118, 189, 0.18)",
+                            "full": false,
+                            "lineColor": "rgb(31, 120, 193)",
+                            "show": true
+                        },
+                        "targets": [
+                            {
+                                "dsType": "influxdb",
+                                "groupBy": [
+                                    {
+                                        "params": [
+                                            "$interval"
+                                        ],
+                                        "type": "time"
+                                    },
+                                    {
+                                        "params": [
+                                            "null"
+                                        ],
+                                        "type": "fill"
+                                    }
+                                ],
+                                "measurement": "jvmThreadCount",
+                                "query": "SELECT mean(\"ThreadCount\") FROM \"jvmThreadCount\" WHERE \"hostname\" = '${JMX_ALIAS}' AND $timeFilter GROUP BY time($interval) fill(null)",
+                                "refId": "A",
+                                "resultFormat": "time_series",
+                                "select": [
+                                    [
+                                        {
+                                            "params": [
+                                                "ThreadCount"
+                                            ],
+                                            "type": "field"
+                                        },
+                                        {
+                                            "params": [],
+                                            "type": "mean"
+                                        }
+                                    ]
+                                ],
+                                "tags": [
+                                    {
+                                        "key": "hostname",
+                                        "operator": "=",
+                                        "value": "${JMX_ALIAS}"
+                                    }
+                                ]
+                            }
+                        ],
+                        "thresholds": "",
+                        "title": "Thread Count",
+                        "type": "singlestat",
+                        "valueFontSize": "80%",
+                        "valueMaps": [
+                            {
+                                "op": "=",
+                                "text": "N/A",
+                                "value": "null"
+                            }
+                        ],
+                        "valueName": "avg"
+                    },
+                    {
+                        "cacheTimeout": null,
+                        "colorBackground": false,
+                        "colorValue": false,
+                        "colors": [
+                            "rgba(245, 54, 54, 0.9)",
+                            "rgba(237, 129, 40, 0.89)",
+                            "rgba(50, 172, 45, 0.97)"
+                        ],
+                        "datasource": "influx",
+                        "editable": true,
+                        "error": false,
+                        "format": "none",
+                        "height": "50px",
+                        "id": 17,
+                        "interval": null,
+                        "isNew": true,
+                        "links": [],
+                        "maxDataPoints": 100,
+                        "nullPointMode": "connected",
+                        "nullText": null,
+                        "postfix": "",
+                        "postfixFontSize": "50%",
+                        "prefix": "",
+                        "prefixFontSize": "50%",
+                        "span": 2,
+                        "sparkline": {
+                            "fillColor": "rgba(31, 118, 189, 0.18)",
+                            "full": false,
+                            "lineColor": "rgb(31, 120, 193)",
+                            "show": false
+                        },
+                        "targets": [
+                            {
+                                "alias": "",
+                                "dsType": "influxdb",
+                                "groupBy": [
+                                    {
+                                        "params": [
+                                            "$interval"
+                                        ],
+                                        "type": "time"
+                                    },
+                                    {
+                                        "params": [
+                                            "null"
+                                        ],
+                                        "type": "fill"
+                                    }
+                                ],
+                                "hide": true,
+                                "measurement": "jvmThreadCount",
+                                "refId": "A",
+                                "resultFormat": "time_series",
+                                "select": [
+                                    [
+                                        {
+                                            "params": [
+                                                "PeakThreadCount"
+                                            ],
+                                            "type": "field"
+                                        },
+                                        {
+                                            "params": [],
+                                            "type": "mean"
+                                        }
+                                    ]
+                                ],
+                                "tags": [
+                                    {
+                                        "key": "hostname",
+                                        "operator": "=",
+                                        "value": "${JMX_ALIAS}"
+                                    }
+                                ]
+                            }
+                        ],
+                        "thresholds": "",
+                        "title": "PeakThreadCount",
+                        "type": "singlestat",
+                        "valueFontSize": "80%",
+                        "valueMaps": [
+                            {
+                                "op": "=",
+                                "text": "N/A",
+                                "value": "null"
+                            }
+                        ],
+                        "valueName": "avg"
+                    }
+                ],
+                "title": "New row"
+            },
+            {
+                "collapse": false,
+                "editable": true,
+                "height": "250px",
+                "panels": [
+                    {
+                        "aliasColors": {},
+                        "bars": false,
+                        "datasource": "influx",
+                        "editable": true,
+                        "error": false,
+                        "fill": 1,
+                        "grid": {
+                            "leftLogBase": 1,
+                            "leftMax": null,
+                            "leftMin": null,
+                            "rightLogBase": 1,
+                            "rightMax": null,
+                            "rightMin": null,
+                            "threshold1": null,
+                            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+                            "threshold2": null,
+                            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+                        },
+                        "id": 1,
+                        "isNew": true,
+                        "legend": {
+                            "avg": false,
+                            "current": false,
+                            "max": false,
+                            "min": false,
+                            "show": true,
+                            "total": false,
+                            "values": false
+                        },
+                        "lines": true,
+                        "linewidth": 1,
+                        "links": [],
+                        "nullPointMode": "connected",
+                        "percentage": false,
+                        "pointradius": 1,
+                        "points": true,
+                        "renderer": "flot",
+                        "seriesOverrides": [
+                            {}
+                        ],
+                        "span": 9,
+                        "stack": false,
+                        "steppedLine": false,
+                        "targets": [
+                            {
+                                "alias": "Committed Heap",
+                                "dsType": "influxdb",
+                                "groupBy": [
+                                    {
+                                        "params": [
+                                            "$interval"
+                                        ],
+                                        "type": "time"
+                                    },
+                                    {
+                                        "params": [
+                                            "none"
+                                        ],
+                                        "type": "fill"
+                                    }
+                                ],
+                                "measurement": "jvmMemory",
+                                "query": "SELECT mean(\"committed\") FROM \"jvmMemory\" WHERE \"hostname\" = '${JMX_ALIAS}' AND $timeFilter GROUP BY time($interval) fill(none)",
+                                "refId": "D",
+                                "resultFormat": "time_series",
+                                "select": [
+                                    [
+                                        {
+                                            "params": [
+                                                "committed"
+                                            ],
+                                            "type": "field"
+                                        },
+                                        {
+                                            "params": [],
+                                            "type": "mean"
+                                        }
+                                    ]
+                                ],
+                                "tags": [
+                                    {
+                                        "key": "hostname",
+                                        "operator": "=",
+                                        "value": "${JMX_ALIAS}"
+                                    }
+                                ]
+                            },
+                            {
+                                "alias": "Used Heap",
+                                "dsType": "influxdb",
+                                "groupBy": [
+                                    {
+                                        "params": [
+                                            "$interval"
+                                        ],
+                                        "type": "time"
+                                    },
+                                    {
+                                        "params": [
+                                            "none"
+                                        ],
+                                        "type": "fill"
+                                    }
+                                ],
+                                "measurement": "jvmMemory",
+                                "query": "SELECT mean(\"used\") FROM \"jvmMemory\" WHERE \"hostname\" = '${JMX_ALIAS}' AND $timeFilter GROUP BY time($interval) fill(none)",
+                                "refId": "A",
+                                "resultFormat": "time_series",
+                                "select": [
+                                    [
+                                        {
+                                            "params": [
+                                                "used"
+                                            ],
+                                            "type": "field"
+                                        },
+                                        {
+                                            "params": [],
+                                            "type": "mean"
+                                        }
+                                    ]
+                                ],
+                                "tags": [
+                                    {
+                                        "key": "hostname",
+                                        "operator": "=",
+                                        "value": "${JMX_ALIAS}"
+                                    }
+                                ]
+                            },
+                            {
+                                "dsType": "influxdb",
+                                "groupBy": [
+                                    {
+                                        "params": [
+                                            "$interval"
+                                        ],
+                                        "type": "time"
+                                    },
+                                    {
+                                        "params": [
+                                            "none"
+                                        ],
+                                        "type": "fill"
+                                    }
+                                ],
+                                "measurement": "jvmMemory",
+                                "query": "SELECT mean(\"max\") FROM \"jvmMemory\" WHERE \"hostname\" = '${JMX_ALIAS}' AND $timeFilter GROUP BY time($interval) fill(none)",
+                                "refId": "B",
+                                "resultFormat": "time_series",
+                                "select": [
+                                    [
+                                        {
+                                            "params": [
+                                                "max"
+                                            ],
+                                            "type": "field"
+                                        },
+                                        {
+                                            "params": [],
+                                            "type": "mean"
+                                        }
+                                    ]
+                                ],
+                                "tags": [
+                                    {
+                                        "key": "hostname",
+                                        "operator": "=",
+                                        "value": "${JMX_ALIAS}"
+                                    }
+                                ]
+                            }
+                        ],
+                        "timeFrom": null,
+                        "timeShift": null,
+                        "title": "System Memory",
+                        "tooltip": {
+                            "shared": true,
+                            "value_type": "cumulative"
+                        },
+                        "type": "graph",
+                        "x-axis": true,
+                        "y-axis": true,
+                        "y_formats": [
+                            "bytes",
+                            "short"
+                        ]
+                    },
+                    {
+                        "cacheTimeout": null,
+                        "colorBackground": false,
+                        "colorValue": false,
+                        "colors": [
+                            "rgba(245, 54, 54, 0.9)",
+                            "rgba(237, 129, 40, 0.89)",
+                            "rgba(50, 172, 45, 0.97)"
+                        ],
+                        "datasource": "influx",
+                        "editable": true,
+                        "error": false,
+                        "format": "bytes",
+                        "height": "50px",
+                        "id": 12,
+                        "interval": null,
+                        "isNew": true,
+                        "links": [],
+                        "maxDataPoints": 100,
+                        "nullPointMode": "connected",
+                        "nullText": null,
+                        "postfix": "",
+                        "postfixFontSize": "50%",
+                        "prefix": "",
+                        "prefixFontSize": "50%",
+                        "span": 2,
+                        "sparkline": {
+                            "fillColor": "rgba(31, 118, 189, 0.18)",
+                            "full": false,
+                            "lineColor": "rgb(31, 120, 193)",
+                            "show": false
+                        },
+                        "targets": [
+                            {
+                                "dsType": "influxdb",
+                                "groupBy": [
+                                    {
+                                        "params": [
+                                            "$interval"
+                                        ],
+                                        "type": "time"
+                                    },
+                                    {
+                                        "params": [
+                                            "null"
+                                        ],
+                                        "type": "fill"
+                                    }
+                                ],
+                                "measurement": "jvmMemory",
+                                "query": "SELECT mean(\"used\") FROM \"jvmMemory\" WHERE \"hostname\" = '${JMX_ALIAS}' AND \"attributeName\" = 'HeapMemoryUsage' AND $timeFilter GROUP BY time($interval) fill(null)",
+                                "refId": "A",
+                                "resultFormat": "time_series",
+                                "select": [
+                                    [
+                                        {
+                                            "params": [
+                                                "used"
+                                            ],
+                                            "type": "field"
+                                        },
+                                        {
+                                            "params": [],
+                                            "type": "mean"
+                                        }
+                                    ]
+                                ],
+                                "tags": [
+                                    {
+                                        "key": "attributeName",
+                                        "operator": "=",
+                                        "value": "HeapMemoryUsage"
+                                    },
+
+                                    {
+                                        "key": "hostname",
+                                        "operator": "=",
+                                        "value": "${JMX_ALIAS}"
+                                    }
+                                ]
+                            }
+                        ],
+                        "thresholds": "",
+                        "title": "Heap Usage",
+                        "type": "singlestat",
+                        "valueFontSize": "80%",
+                        "valueMaps": [
+                            {
+                                "op": "=",
+                                "text": "N/A",
+                                "value": "null"
+                            }
+                        ],
+                        "valueName": "avg"
+                    },
+                    {
+                        "cacheTimeout": null,
+                        "colorBackground": false,
+                        "colorValue": false,
+                        "colors": [
+                            "rgba(245, 54, 54, 0.9)",
+                            "rgba(237, 129, 40, 0.89)",
+                            "rgba(50, 172, 45, 0.97)"
+                        ],
+                        "datasource": "influx",
+                        "editable": true,
+                        "error": false,
+                        "format": "bytes",
+                        "height": "50px",
+                        "id": 16,
+                        "interval": null,
+                        "isNew": true,
+                        "links": [],
+                        "maxDataPoints": 100,
+                        "nullPointMode": "connected",
+                        "nullText": null,
+                        "postfix": "",
+                        "postfixFontSize": "50%",
+                        "prefix": "",
+                        "prefixFontSize": "50%",
+                        "span": 2,
+                        "sparkline": {
+                            "fillColor": "rgba(31, 118, 189, 0.18)",
+                            "full": false,
+                            "lineColor": "rgb(31, 120, 193)",
+                            "show": false
+                        },
+                        "targets": [
+                            {
+                                "dsType": "influxdb",
+                                "groupBy": [
+                                    {
+                                        "params": [
+                                            "$interval"
+                                        ],
+                                        "type": "time"
+                                    },
+                                    {
+                                        "params": [
+                                            "null"
+                                        ],
+                                        "type": "fill"
+                                    }
+                                ],
+                                "measurement": "jvmMemory",
+                                "query": "SELECT mean(\"committed\") FROM \"jvmMemory\" WHERE \"hostname\" = '${JMX_ALIAS}' AND $timeFilter GROUP BY time($interval) fill(null)",
+                                "refId": "A",
+                                "resultFormat": "time_series",
+                                "select": [
+                                    [
+                                        {
+                                            "params": [
+                                                "committed"
+                                            ],
+                                            "type": "field"
+                                        },
+                                        {
+                                            "params": [],
+                                            "type": "mean"
+                                        }
+                                    ]
+                                ],
+                                "tags": [
+                                    {
+                                        "key": "hostname",
+                                        "operator": "=",
+                                        "value": "${JMX_ALIAS}"
+                                    }
+                                ]
+                            }
+                        ],
+                        "thresholds": "5,7,9",
+                        "title": "Committed Memory",
+                        "type": "singlestat",
+                        "valueFontSize": "80%",
+                        "valueMaps": [
+                            {
+                                "op": "=",
+                                "text": "N/A",
+                                "value": "null"
+                            }
+                        ],
+                        "valueName": "avg"
+                    }
+                ],
+                "title": "New row"
+            },
+            {
+                "collapse": false,
+                "editable": true,
+                "height": "250px",
+                "panels": [
+                    {
+                        "aliasColors": {},
+                        "bars": false,
+                        "datasource": "influx",
+                        "editable": true,
+                        "error": false,
+                        "fill": 1,
+                        "grid": {
+                            "leftLogBase": 1,
+                            "leftMax": null,
+                            "leftMin": null,
+                            "rightLogBase": 1,
+                            "rightMax": null,
+                            "rightMin": null,
+                            "threshold1": null,
+                            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+                            "threshold2": null,
+                            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+                        },
+                        "id": 2,
+                        "isNew": true,
+                        "legend": {
+                            "avg": false,
+                            "current": false,
+                            "max": false,
+                            "min": false,
+                            "show": true,
+                            "total": false,
+                            "values": false
+                        },
+                        "lines": true,
+                        "linewidth": 2,
+                        "links": [],
+                        "minSpan": null,
+                        "nullPointMode": "connected",
+                        "percentage": false,
+                        "pointradius": 5,
+                        "points": false,
+                        "renderer": "flot",
+                        "seriesOverrides": [],
+                        "span": 9,
+                        "stack": false,
+                        "steppedLine": false,
+                        "targets": [
+                            {
+                                "alias": "Average System Load",
+                                "dsType": "influxdb",
+                                "groupBy": [
+                                    {
+                                        "params": [
+                                            "$interval"
+                                        ],
+                                        "type": "time"
+                                    },
+                                    {
+                                        "params": [
+                                            "null"
+                                        ],
+                                        "type": "fill"
+                                    }
+                                ],
+                                "measurement": "jvmSystem",
+                                "query": "SELECT mean(\"SystemLoadAverage\") FROM \"jvmSystem\" WHERE \"hostname\" = '${JMX_ALIAS}' AND $timeFilter GROUP BY time($interval) fill(null)",
+                                "refId": "A",
+                                "resultFormat": "time_series",
+                                "select": [
+                                    [
+                                        {
+                                            "params": [
+                                                "SystemLoadAverage"
+                                            ],
+                                            "type": "field"
+                                        },
+                                        {
+                                            "params": [],
+                                            "type": "mean"
+                                        }
+                                    ]
+                                ],
+                                "tags": [
+                                    {
+                                        "key": "hostname",
+                                        "operator": "=",
+                                        "value": "${JMX_ALIAS}"
+                                    }
+                                ]
+                            }
+                        ],
+                        "timeFrom": null,
+                        "timeShift": null,
+                        "title": "System Load",
+                        "tooltip": {
+                            "shared": true,
+                            "value_type": "cumulative"
+                        },
+                        "type": "graph",
+                        "x-axis": true,
+                        "y-axis": true,
+                        "y_formats": [
+                            "short",
+                            "short"
+                        ]
+                    }
+                ],
+                "title": "New row"
+            }
+        ],
+        "time": {
+            "from": "now/w",
+            "to": "now/w"
+        },
+        "timepicker": {
+            "now": true,
+            "refresh_intervals": [
+                "5s",
+                "10s",
+                "30s",
+                "1m",
+                "5m",
+                "15m",
+                "30m",
+                "1h",
+                "2h",
+                "1d"
+            ],
+            "time_options": [
+                "5m",
+                "15m",
+                "1h",
+                "6h",
+                "12h",
+                "24h",
+                "2d",
+                "7d",
+                "30d"
+            ]
+        },
+        "templating": {
+            "list": []
+        },
+        "annotations": {
+            "list": []
+        },
+        "refresh": "10s",
+        "schemaVersion": 8,
+        "version": 13,
+        "links": []
+    }
+}

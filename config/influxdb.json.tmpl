@@ -1,0 +1,48 @@
+{
+    "servers":[
+    {
+        "alias":"${JMX_ALIAS}",
+            "host":"${JMX_HOST}",
+            "port":"${JMX_PORT}",
+            "queries":[
+
+            {
+                "obj" : "java.lang:type=Memory",
+                "attr" : [ "HeapMemoryUsage", "NonHeapMemoryUsage" ],
+                "resultAlias":"jvmMemory",
+                "outputWriters" : [ {
+                    "@class" : "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+                    "url" : "${INFLUXDB_URL}",
+                    "username": "${INFLUXDB_USER}",
+                    "password": "${INFLUXDB_PASSWORD}",
+                    "database" : "${INFLUXDB_NAME}"
+                }]
+            },
+            {
+                "obj" : "java.lang:type=OperatingSystem",
+                "attr" : [ "SystemLoadAverage" ],
+                "resultAlias":"jvmSystem",
+                "outputWriters" : [ {
+                    "@class" : "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+                    "url" : "${INFLUXDB_URL}",
+                    "username": "${INFLUXDB_USER}",
+                    "password": "${INFLUXDB_PASSWORD}",
+                    "database" : "${INFLUXDB_NAME}"
+                }]
+            },
+            {
+                "obj" : "java.lang:type=Threading",
+                "attr" : [ "ThreadCount", "DaemonThreadCount", "PeakThreadCount" ],
+                "resultAlias":"jvmThreadCount",
+                "outputWriters" : [ {
+                    "@class" : "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+                    "url" : "${INFLUXDB_URL}",
+                    "username": "${INFLUXDB_USER}",
+                    "password": "${INFLUXDB_PASSWORD}",
+                    "database" : "${INFLUXDB_NAME}"
+                }]
+            }
+        ]
+    }
+    ]
+}
