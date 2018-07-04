@@ -3,7 +3,7 @@ docker compose的方式一次性安装和配置一下三个服务，用于java�
   * jmxtrans 
   * grafana
 
-要看到最终实现的效果，需要四个步骤：
+### 要看到最终实现的效果，需要四个步骤：
 
 1、监控的目标java程序启动时需要启用jmx，并且设置好jmx开放的端口，通过设置java的启动参数来实现。比如：hbase就是要启用hbase-env.sh中的下面几个选项：
     
@@ -21,3 +21,6 @@ docker compose的方式一次性安装和配置一下三个服务，用于java�
 3、docker-compose up -d启动全部的服务。
 
 4、在浏览器中打开http://服务器的ip:3000，用admin/admin登陆就可以看到效果。
+
+###添加新的机器
+ 默认的配置中，只添加了一个监控机器，如果要添加新的机器的话，需要添加对应的配置，配置文件在conf/influxdb.json.tmpl中。
