@@ -24,3 +24,6 @@ docker compose的方式一次性安装和配置一下三个服务，用于java�
 
 ###添加新的机器
  默认的配置中，只添加了一个监控机器，如果要添加新的机器的话，需要添加对应的配置，配置文件在conf/influxdb.json.tmpl中。
+ 
+ 
+ 另外可以考虑用nicolargo/docker-influxdb-grafana里面的Telegraf替换jmxtrans，因为Telegraf的应用范围更广泛，不只是能够监控java程序，几乎可以监控从操作系统到web服务器到消息队列到hbase等所有的程序，更适合做成一个监控平台。
